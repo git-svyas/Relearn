@@ -1,2 +1,4 @@
-package com.example.mobileapp;public class Demo {
+package com.example.mobileapp;
+
+public class Demo {
 }

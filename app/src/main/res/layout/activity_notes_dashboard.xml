@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotesDashboard"
+    android:orientation="vertical">
+
+
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="">
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/tab_corners"
+
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicatorGravity="stretch"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicator="@drawable/tab_indicator"/>
+    </FrameLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:background="@color/blue"
+        app:singleLine="true">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:chipSpacing="8dp"
+            app:singleSelection="true">
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_mostviewed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Most Viewed"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_important"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Important"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_theory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Theory"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_lab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Lab"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_handwritten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Handwritten"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_mostrecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/white"
+                android:checkable="true"
+                android:text="Most Recent"/>
+        </com.google.android.material.chip.ChipGroup>
+
+<!--        app:chipStrokeWidth = "0.2dp"-->
+<!--        app:chipStrokeColor = "#606060"-->
+    </HorizontalScrollView>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager"/>
+
+</LinearLayout>

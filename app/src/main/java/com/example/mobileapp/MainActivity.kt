@@ -1,9 +1,11 @@
 package com.example.mobileapp
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import com.example.mobileapp.model.Filters
 import com.example.mobileapp.model.Notes
@@ -24,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         tv = findViewById(R.id.button)
         //getNotesList("CN")
         getNotesByFilterList("CN", arrayListOf(Filters.HANDWITTEN.ordinal, Filters.IMPORTANT.ordinal))
+
+        tv.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this,PdfActivity::class.java))
+        })
 
     }
 

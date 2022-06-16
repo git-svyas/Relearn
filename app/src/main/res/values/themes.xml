@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MobileApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MobileApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blueish_black</item>
+        <item name="colorPrimaryVariant">@color/blueish_black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,4 +13,33 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+  <!--  <style name="MaterialSearchViewStyle">
+        &lt;!&ndash; Background for the search bar &ndash;&gt;
+        <item name="searchBackground">@color/theme_primary</item>
+
+        &lt;!&ndash; Change voice icon &ndash;&gt;
+        <item name="searchVoiceIcon">@drawable/ic_action_voice_search_inverted</item>
+
+        &lt;!&ndash; Change clear text icon &ndash;&gt;
+        <item name="searchCloseIcon">@drawable/ic_action_navigation_close_inverted</item>
+
+        &lt;!&ndash; Change up icon &ndash;&gt;
+        <item name="searchBackIcon">@drawable/ic_action_navigation_arrow_back_inverted</item>
+
+        &lt;!&ndash; Change icon for the suggestions &ndash;&gt;
+        <item name="searchSuggestionIcon">@drawable/ic_suggestion</item>
+
+        &lt;!&ndash; Change background for the suggestions list view &ndash;&gt;
+        <item name="searchSuggestionBackground">@android:color/white</item>
+
+        &lt;!&ndash; Change text color for edit text. This will also be the color of the cursor &ndash;&gt;
+        <item name="android:textColor">@color/theme_primary_text_inverted</item>
+
+        &lt;!&ndash; Change hint text color for edit text &ndash;&gt;
+        <item name="android:textColorHint">@color/theme_secondary_text_inverted</item>
+
+        &lt;!&ndash; Hint for edit text &ndash;&gt;
+        <item name="android:hint">@string/search_hint</item>
+    </style>-->
 </resources>

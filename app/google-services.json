@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:215507932515:android:ab906643bb10345d8f2f56",
+        "mobilesdk_app_id": "1:215507932515:android:942e746070cea3828f2f56",
         "android_client_info": {
-          "package_name": "com.example.mobileapp"
+          "package_name": "com.relearn.mobileapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "215507932515-qbond23s2bel89q744ts534s8b96bmtj.apps.googleusercontent.com",
+          "client_id": "215507932515-u8tjcdicqq7bark80ihv3ecv8vtsg27j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.mobileapp",
+            "package_name": "com.relearn.mobileapp",
             "certificate_hash": "2b7f652a0c8e8858830cc7ae2a08b71e120eed14"
           }
         },

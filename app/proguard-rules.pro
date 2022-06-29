@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.example.mobileapp.model.* { *; }
+-keep class com.relearn.mobileapp.model.* { *; }

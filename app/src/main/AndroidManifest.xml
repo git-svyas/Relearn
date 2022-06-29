@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.mobileapp">
+    package="com.relearn.mobileapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,16 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileApp">
         <activity
-            android:name=".AboutUs"
+            android:name="com.relearn.mobileapp.AboutUs"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".NotesDashboard"
+            android:name="com.relearn.mobileapp.WelcomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.relearn.mobileapp.NotesDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.relearn.mobileapp.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,15 +31,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubjectDashboard"
+            android:name="com.relearn.mobileapp.SubjectDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Details"
+            android:name="com.relearn.mobileapp.Details"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.myapplication.Login"
+            android:name="com.relearn.mobileapp.Login"
             android:screenOrientation="portrait" />
-        <activity android:name=".PdfActivity" />
+        <activity android:name="com.relearn.mobileapp.PdfActivity" />
     </application>
 
 </manifest>

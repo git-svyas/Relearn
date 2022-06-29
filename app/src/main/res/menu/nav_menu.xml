@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Branch">
+        <menu>
+            <item
+                android:id="@+id/sub1"
+                android:title="CSE"
+                android:icon="@drawable/ic_daa_cse"/>
+            <item
+                android:id="@+id/sub2"
+                android:title="IT"
+                android:icon="@drawable/ic_branch_it"/>
+            <item
+                android:id="@+id/sub3"
+                android:title="ECE"
+                android:icon="@drawable/ic_branch_ece"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/abt_us"
+        android:title="About Us" />
+    <item
+        android:id="@+id/log_out"
+        android:title="Logout" />
+
+    <item
+        android:id="@+id/footer_spacer_1"
+        android:checkable="false"
+        android:enabled="false"
+        android:orderInCategory="200"
+        android:title="" />
+
+</menu>

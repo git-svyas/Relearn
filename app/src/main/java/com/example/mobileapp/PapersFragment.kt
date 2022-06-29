@@ -3,13 +3,12 @@ package com.example.mobileapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobileapp.adapter.NotesAdapter
 import com.example.mobileapp.adapter.PapersAdapter
 import com.example.mobileapp.helper.NotesHelper
 import com.example.mobileapp.model.Notes
@@ -21,7 +20,7 @@ class PapersFragment : Fragment(), PapersAdapter.OnItemClickListener {
     var papersAdapter: PapersAdapter? = null
 
     private var mList: ArrayList<Notes> = ArrayList()
-    private val subject: String = "OS"
+    private lateinit var subject: String
 
 
     override fun onCreateView(
@@ -33,8 +32,10 @@ class PapersFragment : Fragment(), PapersAdapter.OnItemClickListener {
         NotesHelper.setNotesFragment(this)
         NotesHelper.mPapersFragement = this
 
-        papersRecyclerView = view.findViewById(R.id.rv_papers)
         parentActivity = activity as NotesDashboard
+        subject = parentActivity.intent.getStringExtra("EXTRA_SUBJECT").toString()
+
+        papersRecyclerView = view.findViewById(R.id.rv_papers)
 
         //edge case
         parentActivity.chipGroup.visibility = View.GONE
@@ -44,7 +45,9 @@ class PapersFragment : Fragment(), PapersAdapter.OnItemClickListener {
         papersRecyclerView.setLayoutManager(LinearLayoutManager(activity, RecyclerView.VERTICAL, false))
         papersRecyclerView.adapter = papersAdapter
         Log.d("Main","Inside Papers Fragment")
-        NotesHelper.applyNotesByFilterList(subject, arrayListOf(0),mList)
+
+        var timeLeft = NotesHelper.initTimer(6000)
+        NotesHelper.applyNotesByFilterList(subject, arrayListOf(0),mList,timeLeft)
 
 
         var state: Int? = null
@@ -81,6 +84,8 @@ class PapersFragment : Fragment(), PapersAdapter.OnItemClickListener {
         Log.d("Main","Paper -> Item clicked ${position}")
         var intent: Intent = Intent(parentActivity,PdfActivity::class.java)
         intent.putExtra("EXTRA_URL", papersAdapter?.papersList?.get(position)?.url)
+        intent.putExtra("EXTRA_NOTE_ID", papersAdapter?.papersList?.get(position)?.id)
+        intent.putExtra("EXTRA_VIEWS", papersAdapter?.papersList?.get(position)?.views.toString())
         startActivity(intent)
     }
 }

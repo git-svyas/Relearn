@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/parent_layout_sub"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_sub"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/blueish_black"
+        android:elevation="48dp"
+        >
+        <ImageView
+            android:id="@+id/hmenu"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_hmenus"
+            android:elevation="24dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/toolbar_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Relearn"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:textColor="@color/white"
+            android:textSize="26dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="24dp"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/toolbar_app_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="140dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/logo_sample"
+            android:elevation="24dp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_screen"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:elevation="16dp"
+            app:itemIconTint="#0197C6"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/nav_menu" >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:clickable="true"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/footer_item_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="Made with Love"/>
+
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+</LinearLayout>

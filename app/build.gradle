@@ -42,14 +42,28 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-firestore:24.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.5'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
-    //implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+
+    //Dashboard
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
+
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    //Onboarding Slider
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    implementation("net.thauvin.erik:bitly-shorten:0.9.3")
 }

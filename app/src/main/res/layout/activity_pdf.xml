@@ -16,4 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/pdf_loading_anim"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/pdf_viewer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_fileName="pdf_loading_anim.json"
+        app:lottie_speed="1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

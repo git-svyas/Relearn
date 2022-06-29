@@ -1,48 +1,30 @@
 package com.example.mobileapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-import com.miguelcatalan.materialsearchview.SearchAdapter;
-
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mobileapp.helper.NotesHelper;
 import com.example.mobileapp.model.Notes;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -60,9 +42,10 @@ public class NotesDashboard extends AppCompatActivity {
 
     private ArrayList<Notes> mList;
     private String[] searchSuggestionList;
-    List<Fragment> fragments;
+    private List<Notes> searchSuggestionNotes;
     boolean firstTime = true;
-    SearchAdapter searchAdapter;
+    private String branch;
+    private String subject;
 
     Toolbar toolbar;
     FrameLayout frameLayout;
@@ -74,6 +57,18 @@ public class NotesDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_dashboard);
+
+        branch = getSharedPreferences(getString(R.string.user_details_sf),MODE_PRIVATE).getString("STUDENT_BRANCH",null);
+        if(branch == null){
+            // Handle the error
+            Log.d("Main","Branch is null on Notes Dashboard");
+        }
+
+        subject = getIntent().getStringExtra("EXTRA_SUBJECT");
+        if(subject == null){
+            // Handle the error
+            Log.d("Main","subject is null on Notes Dashboard");
+        }
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -100,7 +95,9 @@ public class NotesDashboard extends AppCompatActivity {
             mList = new ArrayList<>();
             if(checkedIds.isEmpty()){
                 Log.d("Main","Chip " + activeChip.getText() + "is unactive");
-                NotesHelper.applyNotesList("OS",mList);
+                ArrayList<Integer> timeLeft = NotesHelper.initTimer(6000);
+                //NotesHelper.applyNotesList(subject,mList,timeLeft);
+                NotesHelper.applyNotesByFilterList(subject, Arrays.asList(1,2,3,4,5),mList,timeLeft);
                 group.clearCheck();
                 activeChip = null;
                 return;
@@ -108,8 +105,14 @@ public class NotesDashboard extends AppCompatActivity {
             int id = group.getCheckedChipId();
             activeChip = findViewById(id);
             int filter = filtersMap.get(activeChip.getText());
-            Log.d("Main",String.valueOf(filter));
-            NotesHelper.applyNotesByFilterList("OS",Collections.singletonList(filter),mList);
+            if(filter == 1){
+                Snackbar.make(viewPager,"Not enough data available", Snackbar.LENGTH_SHORT).show();
+            }
+            else{
+                Log.d("Main",String.valueOf(filter));
+                ArrayList<Integer> timeLeft = NotesHelper.initTimer(6000);
+                NotesHelper.applyNotesByFilterList(subject,Collections.singletonList(filter),mList,timeLeft);
+            }
 
         });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -134,13 +137,19 @@ public class NotesDashboard extends AppCompatActivity {
             public void onPageSelected(int position) {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
                 if(position == 0){
-
                     NotesHelper.setNotesFragment(NotesHelper.getMNotesFragement());
                     chipGroup.setVisibility(View.VISIBLE);
                 }
                 else if(position == 1){
-                    NotesHelper.setNotesFragment(NotesHelper.getMPapersFragement());
-                    chipGroup.setVisibility(View.GONE);
+                    try {
+                        NotesHelper.setNotesFragment(NotesHelper.getMPapersFragement());
+                    }
+                    catch(Exception e){
+                        Log.d("Main","ViewPager error");
+                    }
+                    finally {
+                        chipGroup.setVisibility(View.GONE);
+                    }
                 }
 
             }
@@ -150,11 +159,17 @@ public class NotesDashboard extends AppCompatActivity {
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                if(firstTime){
-                    initSuggestionList();
-                    firstTime = false;
+                try{
+                    if(firstTime){
+                        initSuggestionList();
+                        firstTime = false;
+                    }
+                    searchView.setSuggestions(searchSuggestionList);
                 }
-                searchView.setSuggestions(searchSuggestionList);
+                catch (Exception e){
+                    Snackbar.make(viewPager,"Wait to Load the data", Snackbar.LENGTH_SHORT).show();
+                    searchView.closeSearch();
+                }
             }
 
             @Override
@@ -166,7 +181,6 @@ public class NotesDashboard extends AppCompatActivity {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(NotesDashboard.this,query,Toast.LENGTH_LONG).show();
                 for(Notes note: NotesHelper.getCompleteNotesList()){
                     if(note.getName().equals(query)){
                         Intent intent = new Intent(NotesDashboard.this,PdfActivity.class);
@@ -190,12 +204,11 @@ public class NotesDashboard extends AppCompatActivity {
     }
 
     private void initSuggestionList() {
-        List<Notes> list = NotesHelper.getCompleteNotesList();
-        int n = list.size();
+        searchSuggestionNotes = NotesHelper.getCompleteNotesList();
+        int n = searchSuggestionNotes.size();
         searchSuggestionList = new String[n];
-
         for(int i=0; i<n; i++){
-            searchSuggestionList[i] = list.get(i).getName();
+            searchSuggestionList[i] = searchSuggestionNotes.get(i).getName();
         }
     }
 
@@ -221,7 +234,7 @@ public class NotesDashboard extends AppCompatActivity {
         if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 }

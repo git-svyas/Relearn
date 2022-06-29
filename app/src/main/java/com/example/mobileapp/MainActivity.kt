@@ -2,82 +2,45 @@ package com.example.mobileapp
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.TextView
-import com.example.mobileapp.model.Filters
-import com.example.mobileapp.model.Notes
-import com.example.mobileapp.service.NotesService
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.example.myapplication.Login
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    var notesService: NotesService? = NotesService()
-    lateinit var tv: TextView;
 
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tv = findViewById(R.id.button)
-        //getNotesList("CN")
-        getNotesByFilterList("CN", arrayListOf(Filters.HANDWITTEN.ordinal, Filters.IMPORTANT.ordinal))
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        tv.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this,PdfActivity::class.java))
-        })
+        mAuth = FirebaseAuth.getInstance()
 
-    }
+        val user = mAuth.currentUser
+        val name = getSharedPreferences(getString(R.string.user_details_sf), MODE_PRIVATE)
+            .getString("STUDENT_NAME",null);
 
-    private fun getNotesList(subject: String){
-        //on background thread
-        GlobalScope.launch {
-            val list: List<Notes> = ArrayList();
-            notesService?.getNotesBySubject(subject,list)
-            Log.d("Main","Size of the list is ${list.size}")
-
-            while(list.size == 0){
-                //loading
+        Handler().postDelayed({
+            if(user != null){
+                if(name == null){
+                    val detailsIntent = Intent(this, Details::class.java)
+                    startActivity(detailsIntent)
+                }
+                else {
+                    val subjectDashboardIntent = Intent(this, SubjectDashboard::class.java)
+                    startActivity(subjectDashboardIntent)
+                }
             }
-
-            //update list on the main thread
-            Log.d("Main","Size of the list is ${list.size}")
-            setListOnMainThread(list)
-        }
-    }
-
-    private fun getNotesByFilterList(subject: String, filter: List<Int>){
-        //on background thread
-        GlobalScope.launch {
-            val list: List<Notes> = ArrayList();
-            notesService?.getNotesByFilter(subject,filter, list)
-            Log.d("Main","Size of the Filter list is ${list.size}")
-
-            while(list.size == 0){
-                //loading
+            else{
+                val signInIntent = Intent(this,Login::class.java)
+                startActivity(signInIntent)
             }
-
-            //update list on the main thread
-            Log.d("Main","Size of the Filter list is ${list.size}")
-            setListOnMainThread(list)
-        }
+            finish()
+        },600)
     }
-
-    private suspend fun setListOnMainThread(list: List<Notes>) {
-        withContext(Main){
-            //logic
-            var res = ""
-            for(item in list){
-                Log.d("Main","Topic name ${item.name}")
-                res += (item.name + "\n")
-            }
-            tv.text = res
-        }
-    }
-
 
 }

@@ -1,13 +1,25 @@
 <resources>
     <string name="app_name">Relearn</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="query_suggestions">
-        <item>Android</item>
-        <item>iOS</item>
-        <item>SCALA</item>
-        <item>Ruby</item>
-        <item>JavaScript</item>
+    <string name="user_details_sf">USER_DETAILS_SF</string>
+
+
+    <string-array name="yearofstudy">
+        <item>1 Year</item>
+        <item>2 Year</item>
+        <item>3 Year</item>
+        <item>4 Year</item>
     </string-array>
+
+    // toggle nav drawer
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="concern">For any concern contact \nsurajverma0347@gmail.com</string>
+
+    <string name="about_us_desc">I am <i>Suraj</i> <i>Verma</i>, a young developer with a desire to make a difference.
+Even though the change may not be significant, I will still try to help others and to make a difference in my own little way.
+\n \nThe development of this application would not have been possible without the contribution of <i>Sarvesh Vyas</i> and <i>Vinayak Soni</i>.</string>
+
 </resources>

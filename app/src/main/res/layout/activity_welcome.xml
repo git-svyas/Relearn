@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_sub"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/blueish_black"
+        android:elevation="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbar_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="24dp"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:text="Relearn"
+            android:textColor="@color/white"
+            android:textSize="26dp"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/toolbar_app_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="24dp"
+            android:paddingRight="180dp"
+            android:src="@drawable/logo_sample" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/hello_welcome_anim"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="hello_welcome_anim.json"
+        app:lottie_speed="2" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/start_button_welcome_anim"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hello_welcome_anim"
+        app:layout_constraintVertical_bias="1.0"
+        android:visibility="gone"
+        app:lottie_fileName="start_button_welcome_anim1.json"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

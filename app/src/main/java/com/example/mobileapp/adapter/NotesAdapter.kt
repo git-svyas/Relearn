@@ -30,7 +30,7 @@ class NotesAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<Rec
 
     fun submitList(list: ArrayList<Notes>){
         val diffUtil = NotesDiffUtil(notesList,list)
-        val diffResult = DiffUtil.calculateDiff(diffUtil);
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
         notesList = list
         diffResult.dispatchUpdatesTo(this)
 //        notesList = list
@@ -45,6 +45,10 @@ class NotesAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<Rec
             itemView.setOnClickListener{
                 listener.onClick(adapterPosition)
             }
+            itemView.setOnLongClickListener {
+                listener.onLongClick(adapterPosition)
+                true
+            }
         }
         fun bind(note: Notes){
             name.setText(note.name)
@@ -56,5 +60,6 @@ class NotesAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<Rec
 
     interface OnItemClickListener{
         fun onClick(position: Int)
+        fun onLongClick(position: Int)
     }
 }
